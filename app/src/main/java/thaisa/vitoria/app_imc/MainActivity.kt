@@ -40,6 +40,19 @@ fun TelaInicial() {
     var peso by remember { mutableStateOf(value = "") }
     var imc by remember { mutableStateOf(value = "") }
 
+    fun calcularIMC() {
+        try {
+            var valorPeso = peso.toDouble()
+            var valorAltura = altura.toDouble()
+            var valorIMC = valorPeso/ Math.pow(valorAltura, 2.0)
+            imc = String.format( "%.2f", valorIMC)
+        }
+        catch (e: Exception) {
+            imc = "Valor incorreto"
+        }
+    }
+
+
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -60,7 +73,7 @@ fun TelaInicial() {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Button(onClick = {}) {
+            Button(onClick = {calcularIMC()}) {
                 Text(text = "Calcular")
             }
 
